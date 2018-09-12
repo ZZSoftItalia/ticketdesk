@@ -34,7 +34,6 @@ namespace TicketDesk.Web.Client
             ConfigureSearch();
             ConfigureAuth(app, container);
             ConfigurePushNotifications();
-            ConfigureApplicationInsights();
 
             MvcHandler.DisableMvcResponseHeader = true;
         }

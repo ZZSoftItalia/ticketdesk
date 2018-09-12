@@ -19,7 +19,7 @@ namespace TicketDesk.Localization.Views.Ticket {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Index {
@@ -88,6 +88,15 @@ namespace TicketDesk.Localization.Views.Ticket {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Files:.
         /// </summary>
         public static string Files {
@@ -106,11 +115,29 @@ namespace TicketDesk.Localization.Views.Ticket {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Priority.
+        ///   Looks up a localized string similar to Priority.
         /// </summary>
         public static string Priority {
             get {
                 return ResourceManager.GetString("Priority", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Requested by:&lt;/b&gt; {0}.
+        /// </summary>
+        public static string RequestedBy {
+            get {
+                return ResourceManager.GetString("RequestedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;Requested date:&lt;/b&gt; {0}.
+        /// </summary>
+        public static string RequestedDate {
+            get {
+                return ResourceManager.GetString("RequestedDate", resourceCulture);
             }
         }
         
@@ -129,6 +156,15 @@ namespace TicketDesk.Localization.Views.Ticket {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         

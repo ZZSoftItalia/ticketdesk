@@ -22,13 +22,35 @@ namespace TicketDesk.Web.Client
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public void RegisterBundles(BundleCollection bundles)
         {
+            // bootstrap-datepicker
+            bundles.Add(new StyleBundle("~/content/datepicker").Include("~/Content/assets/bootstrap-datepicker/css/bootstrap-datepicker.css"));
+            bundles.Add(new ScriptBundle("~/bundles/datepicker")
+                .Include(
+                    "~/Content/assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js",
+                    "~/Content/assets/bootstrap-datepicker/locales/bootstrap-datepicker.it.min.js",
+                    "~/Content/assets/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.min.js",
+                    "~/Content/assets/bootstrap-datepicker/locales/bootstrap-datepicker.de.min.js"
+                ));
+            // SUMMERNOTE
+            bundles.Add(new StyleBundle("~/content/summernote").Include(
+                    "~/Content/assets/summernote/summernote.css"));
+            bundles.Add(new ScriptBundle("~/bundles/summernote").Include(
+                "~/Content/assets/summernote/summernote.js"));
+            bundles.Add(new ScriptBundle("~/bundles/summernote_locale_it-IT").Include(
+                "~/Content/assets/summernote/lang/summernote-it-IT.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/summernote_locale_de-DE").Include(
+                "~/Content/assets/summernote/lang/summernote-de-DE.min.js"));
+            bundles.Add(new ScriptBundle("~/bundles/summernote_locale_pt-BR").Include(
+                "~/Content/assets/summernote/lang/summernote-pt-BR.min.js"));
+
+
 
             bundles.Add(new StyleBundle("~/content/styles").Include(
                     "~/Content/bootstrap.css",
                     "~/Content/site.css",
                     "~/Content/font-awesome.css"));
 
-            bundles.Add(new StyleBundle("~/content/datepicker").Include("~/Content/bootstrap-datepicker.css"));
+            
 
             bundles.Add(new StyleBundle("~/content/wizard").Include("~/Content/wizard.css"));
 
@@ -40,11 +62,8 @@ namespace TicketDesk.Web.Client
                     .Include("~/Scripts/dropzone/dropzone.css", new CssRewriteUrlTransform())
                     .Include("~/Scripts/dropzone/basic.css", new CssRewriteUrlTransform()));
 
-            bundles.Add(new StyleBundle("~/content/summernote").Include(
-                    "~/Scripts/summernote/summernote.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/datepicker")
-                .Include("~/Scripts/bootstrap-datepicker.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/editticket")
                 .Include("~/Scripts/ticketdesk/edit-ticket.js"));
@@ -81,8 +100,7 @@ namespace TicketDesk.Web.Client
                     "~/Scripts/select2.js",
                     "~/Scripts/jquery.ui.sortable/jquery-ui-custom.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/summernote").Include(
-                "~/Scripts/summernote/summernote.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/markdown").Include(
                     "~/Scripts/pagedown/Markdown.Converter.js",
@@ -125,8 +143,15 @@ namespace TicketDesk.Web.Client
                     "~/Scripts/jQueryValidate-locales/jquery.validate_locale_pt-BR.js",
                     "~/Scripts/jquery.globalize/cultures/globalize.culture.pt-BR.js",
                     "~/Scripts/ticketdesk/locale_pt-BR.js"));
-            bundles.Add(new ScriptBundle("~/bundles/summernote_locale_pt-BR").Include(
-                "~/Scripts/summernote/summernote-pt-BR.js"));
+
+            //Localization bundles pt-BR
+            bundles.Add(new ScriptBundle("~/bundles/select2_locale_it-IT").Include(
+                    "~/Scripts/Select2-locales/select2_locale_it.js"));
+            bundles.Add(new ScriptBundle("~/bundles/common_locale_it-IT").Include(
+                    "~/Scripts/jQueryValidate-locales/jquery.validate_locale_it-IT.js",
+                    "~/Scripts/jquery.globalize/cultures/globalize.culture.it-IT.js",
+                    "~/Scripts/ticketdesk/locale_it-IT.js"));
+
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

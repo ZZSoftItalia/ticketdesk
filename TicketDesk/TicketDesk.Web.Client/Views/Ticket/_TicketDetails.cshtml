@@ -71,16 +71,13 @@
 
                     </div>
                     <div>
-                        <div>@(string.IsNullOrEmpty(Model.Priority) ? string.Empty : string.Format(Index.Priority, Model.Priority)) @Model.Category @Model.TicketType</div>
-
                         <div>
-                            @Html.Raw(string.Format(Index.AssignedTo, string.IsNullOrEmpty(Model.AssignedTo) ? "<span class='label label-warning'>" + Index.Unassigned + "</span>" : Model.GetAssignedToInfo().DisplayName))
-                        </div>
-                        <div>
-                            @Html.Raw(string.Format(Index.OwnedBy, Model.GetOwnerInfo().DisplayName))
-                        </div>
-                        <div class="hidden-sm hidden-md hidden-lg">
-                            @Html.Raw(string.Format(Index.UpdatedBy, Model.GetLastUpdatedByInfo().DisplayName, Model.LastUpdateDate.DateTime.ToShortDateString(), Model.LastUpdateDate.DateTime.ToShortTimeString()))
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.RequestedBy</span><span>@Model.RequestedBy</span><br />
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.RequestedDate</span><span>@(string.IsNullOrEmpty(Model.RequestedDateAsString) ? string.Empty : Model.RequestedDateAsString)</span><br />
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.OwnedBy</span><span>@Model.GetOwnerInfo().DisplayName</span><br />
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.Priority</span><span>@Model.Priority</span><br />
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.Category</span><span>@Model.Category</span><br />
+                            <span style="width:100px;display:inline-block;font-weight:700;">@Index.Type</span><span>@Model.TicketType</span><br />
                         </div>
                     </div>
                 </div>

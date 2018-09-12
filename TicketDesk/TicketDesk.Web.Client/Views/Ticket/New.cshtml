@@ -37,7 +37,6 @@
     @Scripts.Render("~/bundles/datepicker")
 
     <script type="text/javascript">
-
         (function () {
             $.ajaxSetup({ cache: false });
             var uploaderConfig = {
@@ -56,9 +55,26 @@
             window.ticketTags.activate(tagsConfig);
             window.ticketDetails.activate(detailsConfig);
             window.ticketFileUploader.activate(uploaderConfig);
-            $("#DueDateAsString").datepicker({ autoclose: true, clearBtn:true, todayBtn: "linked" });
-            $("#TargetDateAsString").datepicker({ autoclose: true, clearBtn:true, todayBtn: "linked" });
-            $("#ResolutionDateAsString").datepicker({ autoclose: true, clearBtn:true, todayBtn: "linked" });
+            var dtpOptions = {
+                autoclose: true,
+                clearBtn: true,
+                todayBtn: "linked",
+                weekStart: 1,
+                language: "en" 
+            }
+            if (window.currentCulture === "it-IT") {
+                dtpOptions.language = "it";
+            }
+            if (window.currentCulture === "de-DE") {
+                dtpOptions.language = "de";
+            }
+            if (window.currentCulture === "pt-BR") {
+                dtpOptions.language = window.currentCulture;
+            }
+            $("#RequestedDateAsString").datepicker(dtpOptions);
+            $("#DueDateAsString").datepicker(dtpOptions);
+            $("#TargetDateAsString").datepicker(dtpOptions);
+            $("#ResolutionDateAsString").datepicker(dtpOptions);
         })();
     </script>
 }
@@ -72,23 +88,18 @@
                         <h2 class="panel-title">@New.Header</h2>
                     </div>
                     <div class="panel-body ">
-
                         @Html.AntiForgeryToken()
-
                         @Html.ValidationSummary(true, New.UnableCreateTicket, new { @class = "alert alert-danger" })
-
                         @Html.HiddenFor(model => model.TicketId)
                         @Html.HiddenFor(model => model.IsHtml)
                         <input type="hidden" name="tempId" value="@ViewBag.TempId" />
-
                         @if (ViewBag.IsMultiProject ?? false)
                         {
                             <div class="form-group">
-                                @Html.LabelFor(model => model.ProjectId, new { @class = "col-md-2 col-sm-1 control-label" })
-                                <div class="col-md-8 col-sm-11">
+                                <div class="col-md-10 col-md-offset-1 col-sm-11">
+                                    @Html.LabelFor(model => model.ProjectId, new { @class = "control-label" })
                                     @Html.DropDownListFor(model => model.ProjectId, Model.GetProjectList((int?)ViewBag.SelectedProjectId), new { @class = "form-control input-sm", tabindex = 0 })
                                     @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
-
                                 </div>
                             </div>
                         }
@@ -97,66 +108,70 @@
                             @Html.HiddenFor(model => model.ProjectId)
                         }
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Title, new { @class = "col-md-2 col-sm-1 control-label focus" })
-                            <div class="col-md-8 col-sm-11">
+                            <div class="col-md-10 col-md-offset-1 col-sm-11">
+                                @Html.LabelFor(model => model.Title, new { @class = "control-label focus" })
                                 @Html.TextBoxFor(model => model.Title, new { @class = "form-control input-sm", placeholder = New.TicketTitle_Placeholder, tabindex = 1, autofocus = string.Empty })
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TicketType, new { @class = "col-md-2 col-sm-1 control-label" })
+                            <div class="col-md-8 col-md-offset-1 col-sm-8">
+                                @Html.LabelFor(model => model.RequestedBy, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.RequestedBy, new { @class = "form-control input-sm", placeholder = New.RequestedBy_Placeholder, tabindex = 2, autofocus = string.Empty })
+                                @Html.ValidationMessageFor(model => model.RequestedBy, "", new { @class = "text-danger" })
+                            </div>
                             <div class="col-md-2 col-sm-3">
-                                @Html.DropDownListFor(model => model.TicketType, Model.GetTicketTypeList(), new { @class = "form-control input-sm", tabindex = 2 })
+                                @Html.LabelFor(model => model.RequestedDate, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.RequestedDateAsString, new { @class = "form-control input-sm", placeholder = New.RequestedDate_Placeholder, tabindex = 3, autofocus = string.Empty })
+                                @Html.ValidationMessageFor(model => model.RequestedDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-2 col-md-offset-1 col-sm-3">
+                                @Html.LabelFor(model => model.TicketType, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.TicketType, Model.GetTicketTypeList(), new { @class = "form-control input-sm", tabindex = 4 })
                                 @Html.ValidationMessageFor(model => model.TicketType, "", new { @class = "text-danger" })
                             </div>
-
-                            @Html.LabelFor(model => model.Category, new { @class = "col-md-1 col-sm-1 control-label" })
                             <div class="col-md-2 col-sm-3">
-                                @Html.DropDownListFor(model => model.Category, Model.GetCategoryList(), new { @class = "form-control input-sm", tabindex = 3 })
+                                @Html.LabelFor(model => model.Category, new { @class = "control-label" })
+                                @Html.DropDownListFor(model => model.Category, Model.GetCategoryList(), new { @class = "form-control input-sm", tabindex = 5 })
                                 @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
                             </div>
                             @if (Model.AllowEditPriorityList())
                             {
-                                @Html.LabelFor(model => model.Priority, new { @class = "col-md-1 col-sm-1 control-label" })
                                 <div class="col-md-2 col-sm-3">
-                                    @Html.DropDownListFor(model => model.Priority, Model.GetPriorityList(), new { @class = "form-control input-sm", tabindex = 4 })
+                                    @Html.LabelFor(model => model.Priority, new { @class = "control-label" })
+                                    @Html.DropDownListFor(model => model.Priority, Model.GetPriorityList(), new { @class = "form-control input-sm", tabindex = 6 })
                                     @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
                                 </div>
                             }
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-2 col-md-offset-2 col-sm-1 col-sm-offset-1">
-                                <label class="checkbox-inline" for="affectsCustomer">
-                                    <input class="" type="checkbox" name="affectsCustomer" id="affectsCustomer" value="true" tabindex="5" />
-                                    @New.AffectsCustomer
-                                </label>
+                            <div class="col-md-2 col-sm-3 text-center">
+                                <label class="control-label" for="affectsCustomer"> @New.AffectsCustomer</label><br />
+                                <input class="checkbox-inline" type="checkbox" name="affectsCustomer" id="affectsCustomer" value="true" tabindex="7" /> 
                             </div>
-                            @Html.LabelFor(model => model.DueDate, new { @class = "col-md-2 col-sm-2 control-label" })
-                            <div class="col-md-4 col-sm-6">
-                                @Html.TextBoxFor(model => model.DueDateAsString, new { @class = "form-control input-sm", tabindex = 6 })
+                            <div class="col-md-2 col-sm-3">
+                                @Html.LabelFor(model => model.DueDate, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.DueDateAsString, new { @class = "form-control input-sm", tabindex = 8 })
                             </div>
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(model => model.TargetDate, new { @class = "col-md-2 col-sm-2 control-label" })
-                            <div class="col-md-3 col-sm-3">
-                                @Html.TextBoxFor(model => model.TargetDateAsString, new { @class = "form-control input-sm", tabindex = 7 })
+                            <div class="col-md-2 col-md-offset-1 col-sm-3">
+                                @Html.LabelFor(model => model.TargetDate, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.TargetDateAsString, new { @class = "form-control input-sm", tabindex = 9 })
                             </div>
-                            @Html.LabelFor(model => model.ResolutionDate, new { @class = "col-md-2 col-sm-2 control-label" })
-                            <div class="col-md-3 col-sm-3">
-                                @Html.TextBoxFor(model => model.ResolutionDateAsString, new { @class = "form-control input-sm", tabindex = 8 })
+                            <div class="col-md-2 col-sm-3">
+                                @Html.LabelFor(model => model.ResolutionDate, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.ResolutionDateAsString, new { @class = "form-control input-sm", tabindex = 10 })
                             </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.EstimatedDuration, new { @class = "col-md-2 col-sm-3 control-label" })
-                            <div class="col-md-3 col-sm-6">
-                                @Html.TextBoxFor(model => model.EstimatedDuration, new { @class = "form-control input-sm", tabindex = 9 })
+                            <div class="col-md-2 col-sm-3">
+                                @Html.LabelFor(model => model.EstimatedDuration, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.EstimatedDuration, new { @class = "form-control input-sm", tabindex = 11 })
                                 @Html.ValidationMessageFor(model => model.EstimatedDuration, "", new { @class = "text-danger" })
                             </div>
-
-                            @Html.LabelFor(model => model.ActualDuration, new { @class = "col-md-2 col-sm-3 control-label" })
-                            <div class="col-md-3 col-sm-6">
-                                @Html.TextBoxFor(model => model.ActualDuration, new { @class = "form-control input-sm", tabindex = 10 })
+                            
+                            <div class="col-md-2 col-sm-3">
+                                @Html.LabelFor(model => model.ActualDuration, new { @class = "control-label" })
+                                @Html.TextBoxFor(model => model.ActualDuration, new { @class = "form-control input-sm", tabindex = 12 })
                                 @Html.ValidationMessageFor(model => model.ActualDuration, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -164,8 +179,8 @@
                         {
                             <div class="form-group">
                                 @Html.LabelFor(model => model.TagList, new { @class = "col-md-2 col-sm-1 control-label" })
-                                <div class="col-md-8 col-sm-11">
-                                    @Html.TextBoxFor(m => m.TagList, new { id = "ticketTags", @class = "form-control input-sm", tabindex = 11 })
+                                <div class="col-md-9 col-sm-11">
+                                    @Html.TextBoxFor(m => m.TagList, new { id = "ticketTags", @class = "form-control input-sm", tabindex = 13 })
                                 </div>
                             </div>
                         }
@@ -173,7 +188,7 @@
                         {
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-1 control-label text-right" for="summernote">@New.Details</label>
-                                <div class="col-md-8 col-sm-11">
+                                <div class="col-md-9 col-sm-11">
                                     <textarea id="wmd-input-ticketDetails" name="Details" data-val-required="" data-val="true">@Model.Details</textarea>
                                     @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
                                 </div>
@@ -183,19 +198,16 @@
                         {
                             <div class="form-group">
                                 <label class="col-md-2 col-sm-1 control-label text-right" for="wmd-input-ticketDetails">@New.Details</label>
-                                <div class="col-md-8 col-sm-11 wmd-panel">
-                                    <div class=" tabbable tabs-below">
+                                <div class="col-md-9 col-sm-11 wmd-panel">
+                                    <div class="tabbable tabs-below">
                                         <div class="tab-content">
                                             <div class="tab-pane fade in active" id="tab1">
                                                 <div id="wmd-button-bar-ticketDetails" class="" style="display: inline-block"></div>
-                                                @Html.TextAreaFor(model => model.Details, new { id = "wmd-input-ticketDetails", @class = "wmd-input form-control", data_val_required = "", data_val = "true", cols = "92", rows = "15", style = "height:200px", tabindex = 12 })
-
+                                                @Html.TextAreaFor(model => model.Details, new { id = "wmd-input-ticketDetails", @class = "wmd-input form-control", data_val_required = "", data_val = "true", cols = "92", rows = "15", style = "height:200px", tabindex = 14 })
                                             </div>
                                             <div class="tab-pane fade" id="tab2">
                                                 <div class="row" style="min-height: 35px;"></div>
-
                                                 <div id="wmd-preview-ticketDetails" class="wmd-panel wmd-preview form-control">
-
                                                 </div>
                                             </div>
                                         </div>
@@ -213,7 +225,7 @@
                             {
                                 @Html.LabelFor(model => model.Owner, new { @class = "col-md-2 col-sm-1 control-label" })
                                 <div class="col-md-3 col-sm-5">
-                                    @Html.DropDownListFor(model => model.Owner, Model.GetOwnersList(), new { @class = "form-control input-sm", tabindex = 13 })
+                                    @Html.DropDownListFor(model => model.Owner, Model.GetOwnersList(), new { @class = "form-control input-sm", tabindex = 15 })
                                     @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
                                 </div>
                             }
@@ -221,14 +233,14 @@
                             {
                                 @Html.LabelFor(model => model.AssignedTo, new { @class = "col-md-2 col-sm-2 control-label" })
                                 <div class="col-md-3 col-sm-4">
-                                    @Html.DropDownListFor(model => model.AssignedTo, Model.GetAssignedToList(), new { @class = "form-control input-sm", tabindex = 14 })
+                                    @Html.DropDownListFor(model => model.AssignedTo, Model.GetAssignedToList(), new { @class = "form-control input-sm", tabindex = 16 })
                                     @Html.ValidationMessageFor(model => model.AssignedTo, "", new { @class = "text-danger" })
                                 </div>
                             }
                         </div>
                         <div class="form-group">
                             <label class="col-md-2 col-sm-1 control-label">@New.Files</label>
-                            <div class="col-md-8 col-sm-11">
+                            <div class="col-md-9 col-sm-11">
                                 @{
                                     var demoMode = ConfigurationManager.AppSettings["ticketdesk:DemoModeEnabled"] ?? "false";
                                     if (demoMode.Equals("true", StringComparison.InvariantCultureIgnoreCase))
@@ -246,11 +258,10 @@
                                     }}
                             </div>
                         </div>
-
                     </div>
                     <div class="panel-footer">
                         <div class="">
-                            <button type="submit" class="btn btn-success" tabindex="15">@New.SaveOption</button>&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-success" tabindex="17">@New.SaveOption</button>&nbsp;&nbsp;
                             @Html.ActionLink(New.BackOption, "Index")
                         </div>
                     </div>

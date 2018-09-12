@@ -19,13 +19,13 @@
 
 @if (ViewBag.IsMultiProject ?? false)
 {
-<div class="form-group">
-    @Html.LabelFor(model => model.ProjectId, new {@class = "col-sm-2 control-label"})
-    <div class="col-sm-8">
-        @Html.DropDownListFor(model => model.ProjectId, Model.GetProjectList((int)Model.ProjectId), new { @class = "form-control input-sm", tabindex = 0 })
-        @Html.ValidationMessageFor(model => model.ProjectId, "", new {@class = "text-danger"})
+    <div class="form-group">
+        @Html.LabelFor(model => model.ProjectId, new { @class = "col-sm-2 control-label" })
+        <div class="col-sm-8">
+            @Html.DropDownListFor(model => model.ProjectId, Model.GetProjectList((int)Model.ProjectId), new { @class = "form-control input-sm", tabindex = 0 })
+            @Html.ValidationMessageFor(model => model.ProjectId, "", new { @class = "text-danger" })
+        </div>
     </div>
-</div>
 }
 else
 {
@@ -39,7 +39,18 @@ else
         @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
     </div>
 </div>
-
+<div class="form-group">
+    <div class="col-md-6 col-sm-3 col-md-offset-2">
+        @Html.LabelFor(model => model.RequestedBy, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.RequestedBy, new { @class = "form-control input-sm", placeholder = Strings.RequestedBy_Placeholder, tabindex = 2, autofocus = string.Empty })
+        @Html.ValidationMessageFor(model => model.RequestedBy, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-2 col-sm-3">
+        @Html.LabelFor(model => model.RequestedDate, new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.RequestedDateAsString, new { @class = "form-control input-sm", placeholder = Strings.RequestedDate_Placeholder, tabindex = 3, autofocus = string.Empty })
+        @Html.ValidationMessageFor(model => model.RequestedDate, "", new { @class = "text-danger" })
+    </div>
+</div>
 <div class="form-group">
     @Html.LabelFor(model => model.TicketType, new { @class = "col-sm-2 control-label" })
     <div class="col-sm-2">
@@ -99,14 +110,14 @@ else
         <div class="col-sm-6">
             @Html.LabelFor(model => model.EstimatedDuration, new { @class = "col-sm-6 control-label" })
             <div class="col-sm-6" style="padding-right:0">
-                @Html.TextBoxFor(model => model.EstimatedDuration, new { @class = "form-control input-sm", style = "padding-right:0", tabindex = 10 })                
+                @Html.TextBoxFor(model => model.EstimatedDuration, new { @class = "form-control input-sm", style = "padding-right:0", tabindex = 10 })
             </div>
             @Html.ValidationMessageFor(model => model.EstimatedDuration, "", new { @class = "text-danger", style = "float:right" })
         </div>
         <div class="col-sm-6" style="padding-right:0">
             @Html.LabelFor(model => model.ActualDuration, new { @class = "col-sm-6 control-label" })
             <div class="col-sm-6" style="padding-right:0">
-                @Html.TextBoxFor(model => model.ActualDuration, new { @class = "form-control input-sm", style = "padding-right:0", tabindex = 11 })                
+                @Html.TextBoxFor(model => model.ActualDuration, new { @class = "form-control input-sm", style = "padding-right:0", tabindex = 11 })
             </div>
             @Html.ValidationMessageFor(model => model.ActualDuration, "", new { @class = "text-danger", style = "float:right" })
         </div>

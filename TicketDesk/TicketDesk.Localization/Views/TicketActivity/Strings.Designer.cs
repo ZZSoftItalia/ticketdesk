@@ -19,7 +19,7 @@ namespace TicketDesk.Localization.Views.TicketActivity {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -193,6 +193,24 @@ namespace TicketDesk.Localization.Views.TicketActivity {
         public static string ReOpen_Label {
             get {
                 return ResourceManager.GetString("ReOpen_Label", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested by.
+        /// </summary>
+        public static string RequestedBy_Placeholder {
+            get {
+                return ResourceManager.GetString("RequestedBy_Placeholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested date.
+        /// </summary>
+        public static string RequestedDate_Placeholder {
+            get {
+                return ResourceManager.GetString("RequestedDate_Placeholder", resourceCulture);
             }
         }
         

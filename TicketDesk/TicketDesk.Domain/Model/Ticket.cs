@@ -57,6 +57,13 @@ namespace TicketDesk.Domain.Model
         [Display(ResourceType = typeof(Strings), Name = "TicketCategory", ShortName = "TicketCategoryShort")]
         public string Category { get; set; }
 
+        [StringLength(256, ErrorMessageResourceName = "FieldMaximumLength", ErrorMessageResourceType = typeof(Validation))]
+        [Display(ResourceType = typeof(Strings), Name = "TicketRequestedBy", ShortName = "TicketRequestedByShort")]
+        public string RequestedBy { get; set; }
+        
+        [Display(ResourceType = typeof(Strings), Name = "TicketRequestedDate", ShortName = "TicketRequestedDateShort")]
+        public DateTime? RequestedDate { get; set; }
+
         [Required(ErrorMessageResourceName = "FieldRequired", ErrorMessageResourceType = typeof(Validation))]
         [StringLength(500, ErrorMessageResourceName = "FieldMaximumLength", ErrorMessageResourceType = typeof(Validation))]
         [Display(ResourceType = typeof(Strings), Name = "TicketTitle", ShortName = "TicketTitleShort")]
@@ -97,6 +104,30 @@ namespace TicketDesk.Domain.Model
         [Display(ResourceType = typeof(Strings), Name = "TicketActualDuration", ShortName = "TicketActualDurationShort")]
         public decimal? ActualDuration { get; set; }
 
+        [NotMapped]
+        public string RequestedDateAsString
+        {
+            get
+            {
+                return RequestedDate.HasValue ? RequestedDate.Value.Date.ToShortDateString() : string.Empty;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty((value ?? string.Empty).Trim()))
+                {
+                    this.RequestedDate = null;
+                }
+                else
+                {
+                    DateTime dt;
+                    if (DateTime.TryParse(value, out dt))
+                    {
+                        this.RequestedDate = dt;
+                    }
+                }
+            }
+
+        }
         [NotMapped]
         public string DueDateAsString
         {

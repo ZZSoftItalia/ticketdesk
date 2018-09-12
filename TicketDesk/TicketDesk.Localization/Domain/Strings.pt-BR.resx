@@ -449,4 +449,16 @@
   <data name="DefaultLogonDomain" xml:space="preserve">
     <value>Domínio de logon padrão</value>
   </data>
+  <data name="TicketRequestedBy" xml:space="preserve">
+    <value>Solicitado por</value>
+  </data>
+  <data name="TicketRequestedByShort" xml:space="preserve">
+    <value>Solicitado por</value>
+  </data>
+  <data name="TicketRequestedDate" xml:space="preserve">
+    <value>Data solicitada</value>
+  </data>
+  <data name="TicketRequestedDateShort" xml:space="preserve">
+    <value>Data solicitada</value>
+  </data>
 </root>

@@ -222,6 +222,7 @@
             if ($('#wmd-input-activity').length) {
                 configureCommentEditor();
             }
+            $("#RequestedDateAsString").datepicker({ autoclose: true, clearBtn: true, todayBtn: "linked" });
             $("#DueDateAsString").datepicker({ autoclose: true, clearBtn: true, todayBtn: "linked" });
             $("#TargetDateAsString").datepicker({ autoclose: true, clearBtn: true, todayBtn: "linked" });
             $("#ResolutionDateAsString").datepicker({ autoclose: true, clearBtn: true, todayBtn: "linked" });

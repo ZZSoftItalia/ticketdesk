@@ -880,6 +880,42 @@ namespace TicketDesk.Localization.Domain {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Requested by.
+        /// </summary>
+        public static string TicketRequestedBy {
+            get {
+                return ResourceManager.GetString("TicketRequestedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested by.
+        /// </summary>
+        public static string TicketRequestedByShort {
+            get {
+                return ResourceManager.GetString("TicketRequestedByShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested date.
+        /// </summary>
+        public static string TicketRequestedDate {
+            get {
+                return ResourceManager.GetString("TicketRequestedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested date.
+        /// </summary>
+        public static string TicketRequestedDateShort {
+            get {
+                return ResourceManager.GetString("TicketRequestedDateShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Resolution Date.
         /// </summary>
         public static string TicketResolutionDate {

@@ -145,6 +145,12 @@
   <data name="PreviewOption" xml:space="preserve">
     <value>Preview</value>
   </data>
+  <data name="RequestedBy_Placeholder" xml:space="preserve">
+    <value>Requested by</value>
+  </data>
+  <data name="RequestedDate_Placeholder" xml:space="preserve">
+    <value>Requested date</value>
+  </data>
   <data name="SaveOption" xml:space="preserve">
     <value>Create</value>
   </data>
